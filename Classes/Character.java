@@ -9,20 +9,24 @@ class Character {
     this.level = level;
   }
 
-  String getName() {
-    return this.name;
+  void setHp(int hp) {
+    this.hp = hp;
+  }
+
+  void setLevel(int level) {
+    this.level = level;
   }
 
   int getHp() {
     return this.hp;
   }
 
-  Object getStats() {
-    return {
-      name: this.name,
-      hp: this.hp,
-      level: this.level,
-    }
+  int getLevel() {
+    return this.level;
+  }
+
+  String getName() {
+    return this.name;
   }
 
   public static void main() {
@@ -31,6 +35,6 @@ class Character {
 
     System.out.println(alice.getName());
     System.out.println(combatManager.heal(20));
-    System.out.println(alice);
+    System.out.println(combatManager.levelUp(1));
   }
 }
