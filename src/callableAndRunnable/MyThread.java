@@ -1,4 +1,4 @@
-package CallableAndRunnable;
+package callableAndRunnable;
 
 import java.util.Random;
 import java.util.concurrent.*;

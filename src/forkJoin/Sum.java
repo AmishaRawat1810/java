@@ -1,6 +1,7 @@
-package ForkJoin;
+package forkJoin;
 
 import java.util.List;
+import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveTask;
 
 public class Sum extends RecursiveTask<Integer> {
@@ -18,7 +19,7 @@ public class Sum extends RecursiveTask<Integer> {
     protected Integer compute() {
         int sum = 0;
 
-        if (startIndex - endIndex <= 2) {
+        if (endIndex - startIndex <= 2) {
             for (int i = startIndex; i < endIndex; i++) {
                 sum += numbers.get(i);
             }
@@ -26,23 +27,23 @@ public class Sum extends RecursiveTask<Integer> {
         }
 
         int midIndex = (startIndex + endIndex) / 2;
-        Sum leftHalf = new Sum(numbers, startIndex, endIndex - midIndex);
-        Sum rightHalf = new Sum(numbers, midIndex, endIndex - midIndex);
+        Sum leftHalf = new Sum(numbers, startIndex, midIndex);
+        Sum rightHalf = new Sum(numbers, midIndex, endIndex);
 
         leftHalf.fork();
-        rightHalf.fork();
-
+        int rJoin = rightHalf.compute();
         int lJoin = leftHalf.join();
-        int rJoin = rightHalf.join();
 
-        sum = lJoin + rJoin;
-        System.out.println("reached");
-        return sum;
+        return lJoin + rJoin;
     }
 
     static void main() {
         List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9);
         Sum sum1 = new Sum(numbers, 0, numbers.size());
-        System.out.println(sum1.compute());
+
+        try (ForkJoinPool pool = new ForkJoinPool()) {
+            System.out.println(pool.invoke(sum1));
+            pool.shutdown();
+        }
     }
 }

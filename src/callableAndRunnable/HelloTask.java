@@ -1,4 +1,4 @@
-package CallableAndRunnable;
+package callableAndRunnable;
 
 public class HelloTask implements Runnable {
 
