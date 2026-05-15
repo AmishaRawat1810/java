@@ -14,9 +14,9 @@ public class WatcherOverFile {
 
         try {
             WatchService watcher = FileSystems.getDefault().newWatchService();
-            parentDir.register(watcher,ENTRY_CREATE,ENTRY_DELETE, ENTRY_MODIFY);
+            parentDir.register(watcher, ENTRY_CREATE, ENTRY_DELETE, ENTRY_MODIFY);
 
-            for (;;) {
+            for (; ; ) {
                 WatchKey key = watcher.take();
 
                 for (WatchEvent<?> pollEvent : key.pollEvents()) {
