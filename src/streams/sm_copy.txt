@@ -1,0 +1,3 @@
+offer
+boolean offer(E e)
+Inserts the specified element into this queue if it is possible to do so immediately without violating capacity restrictions returning true upon success and false if no space is currently available. When using a capacity-restricted queue this method is generally preferable to add(E) which can fail to insert an element only by throwing an exception.
