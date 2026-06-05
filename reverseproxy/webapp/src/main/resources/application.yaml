@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: webapp
+jwt:
+  secret: ${JWT_SECRET}
+  expiration: 3600000
